@@ -1,47 +1,47 @@
 const { desktopCapturer } = require('electron');
 
 const init = async () => {
-  console.log('running');
-  const sourceTypes = ['window', 'screen'];
+  const sourceTypes = ['screen'];
+
   const userMediaProperties = {
+    fetchWindowIcons: false,
     audio: false,
     video: {
       mandatory: {
         chromeMediaSource: 'desktop',
-        minWidth: 1280,
-        maxWidth: 1280,
-        minHeight: 720,
-        maxHeight: 720
+        minWidth: window.innerWidth,
+        maxWidth: window.innerWidth ,
+        minHeight: window.innerHeight,
+        maxHeight: window.innerHeight * 5,
       }
     },
   };
 
   try {
+
     const sources = await desktopCapturer.getSources({ types: sourceTypes });
-    // for (const source of sources) {
-    //   if (source.name === 'Electron') {
-    //     const properties = userMediaProperties;
-    //     properties.chromeMediaSourceId = source.id;
+    if (sources.length === 1) {
+      alert('No external displays detected.');
+    } else {
+      for (let i = 0; i < sources.length; i++) {
+        const properties = userMediaProperties;
+        properties.video.mandatory.chromeMediaSourceId = sources[i].id;
 
-    //     const stream = await navigator.mediaDevices.getUserMedia(properties);
+        const stream = await navigator.mediaDevices.getUserMedia(properties);
 
-    //     handleStream(stream);
-    //   }
-    // }
-    const properties = userMediaProperties;
-    properties.chromeMediaSourceId = sources[0].id;
-
-    const stream = await navigator.mediaDevices.getUserMedia(properties);
-
-    handleStream(stream);
+        handleStream(stream);
+      }
+    }
   } catch (err) {
     console.log(err);
   }
 }
 
 const handleStream = (stream) => {
-  const video = document.getElementById('#video');
+  const video = document.createElement("video");
+  video.classList = ['stream'];
   video.srcObject = stream;
+  document.getElementById('panel').appendChild(video);
   video.onloadedmetadata = e => video.play();
 }
 

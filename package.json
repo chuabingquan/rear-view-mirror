@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "electron": "^7.1.9"
+  },
+  "dependencies": {
+    "mac-screen-capture-permissions": "^1.1.0"
   }
 }

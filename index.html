@@ -2,17 +2,34 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sidetrack</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+    }
+
+    #panel {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+    }
+
+    .stream {
+      object-fit: fill;
+    }
+  </style>
 </head>
 
 <body>
-    <h1>fk u bc</h1>
-    <video id="#video"></video>
-    <script src="./renderer.js"></script>
+  <div id="panel"></div>
+  <script src="./renderer.js"></script>
 </body>
 
 </html>
