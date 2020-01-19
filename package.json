@@ -1,7 +1,7 @@
 {
-  "name": "sidetrack",
+  "name": "rear-view-mirror",
   "version": "1.0.0",
-  "repository": "https://github.com/chuabingquan/sidetrack.git",
+  "repository": "https://github.com/chuabingquan/rear-view-mirror.git",
   "author": "Chua Bing Quan <chipneverdies@gmail.com>",
   "license": "MIT",
   "main": "main.js",
@@ -11,7 +11,5 @@
   "devDependencies": {
     "electron": "^7.1.9"
   },
-  "dependencies": {
-    "mac-screen-capture-permissions": "^1.1.0"
-  }
+  "dependencies": {}
 }
