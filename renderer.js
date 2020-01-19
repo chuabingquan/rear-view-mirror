@@ -1,4 +1,7 @@
-const { desktopCapturer } = require('electron');
+const {
+  desktopCapturer,
+  remote
+} = require('electron');
 
 const init = async () => {
   const sourceTypes = ['screen'];
@@ -10,7 +13,7 @@ const init = async () => {
       mandatory: {
         chromeMediaSource: 'desktop',
         minWidth: window.innerWidth,
-        maxWidth: window.innerWidth ,
+        maxWidth: window.innerWidth,
         minHeight: window.innerHeight,
         maxHeight: window.innerHeight * 5,
       }
@@ -18,12 +21,24 @@ const init = async () => {
   };
 
   try {
+    let warningContainer = document.getElementById('warning-container');
+    let panel = document.getElementById('panel');
 
-    const sources = await desktopCapturer.getSources({ types: sourceTypes });
+    const sources = await desktopCapturer.getSources({
+      types: sourceTypes
+    });
     if (sources.length === 1) {
-      alert('No external displays detected.');
+      warningContainer.classList.remove('hide');
+      warningContainer.classList.add('flex')
+      panel.classList.remove('flex');
+      panel.classList.add('hide');
     } else {
-      for (let i = 0; i < sources.length; i++) {
+      warningContainer.classList.add('hide');
+      warningContainer.classList.remove('flex');
+      panel.classList.remove('hide');
+      panel.classList.add('flex');
+
+      for (let i = 1; i < sources.length; i++) {
         const properties = userMediaProperties;
         properties.video.mandatory.chromeMediaSourceId = sources[i].id;
 
